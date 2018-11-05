@@ -1,0 +1,37 @@
+﻿@model Faculdade.Models.Users
+@{ Layout = null; }
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Locação de autos</title>
+    <link href="~/Content/login.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" type="text/css" />
+    @Scripts.Render("~/bundles/jquery")
+</head>
+
+<body>
+@using (Html.BeginForm("", "Login", FormMethod.Post, new { @class = "form-signin text-center" }))
+{
+    @Html.ValidationSummary(true, "")
+
+    <img class="img_login" src="~/Images/Icon-user.png" alt="">
+    <h3>Acesso ao sistema</h3>
+
+    <div class="form-group">
+        @Html.TextBoxFor(model => model.register, new { @class = "form-control", @placeholder = "Registro", @autofocus = "autofocus" })
+        @Html.ValidationMessageFor(model => model.register, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.PasswordFor(model => model.password, new { @class = "form-control", @placeholder = "Senha" })
+        @Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger" })
+    </div>
+
+    <input type="submit" value="Entrar" class="btn btn-block btn-info" />
+}
+
+</body>
+</html>

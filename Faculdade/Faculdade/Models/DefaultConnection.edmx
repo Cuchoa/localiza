@@ -1,0 +1,373 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="rentacarModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.6" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Clients">
+          <Key>
+            <PropertyRef Name="id_client" />
+          </Key>
+          <Property Name="id_client" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="150" />
+          <Property Name="email" Type="varchar" MaxLength="80" />
+          <Property Name="cpf" Type="varchar" MaxLength="20" />
+          <Property Name="sexo" Type="varchar" MaxLength="20" />
+          <Property Name="phone" Type="varchar" MaxLength="20" />
+          <Property Name="cnh" Type="varchar" MaxLength="15" />
+          <Property Name="registroCnh" Type="varchar" MaxLength="15" />
+          <Property Name="validadeCnh" Type="varchar" MaxLength="30" />
+          <Property Name="categoriaCnh" Type="varchar" MaxLength="10" />
+          <Property Name="ufCnh" Type="varchar" MaxLength="30" />
+          <Property Name="rg" Type="varchar" MaxLength="20" />
+          <Property Name="nascimento" Type="varchar" MaxLength="30" />
+          <Property Name="logradouro" Type="varchar" MaxLength="80" />
+          <Property Name="cep" Type="varchar" MaxLength="20" />
+          <Property Name="numero" Type="varchar" MaxLength="20" />
+          <Property Name="complemento" Type="varchar" MaxLength="100" />
+          <Property Name="bairro" Type="varchar" MaxLength="50" />
+          <Property Name="cidade" Type="varchar" MaxLength="100" />
+          <Property Name="estado" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Features">
+          <Key>
+            <PropertyRef Name="id_feature" />
+          </Key>
+          <Property Name="id_feature" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fuel_id" Type="int" Nullable="false" />
+          <Property Name="door" Type="int" Nullable="false" />
+          <Property Name="air_conditioning" Type="bool" Nullable="false" />
+          <Property Name="eletric_glass" Type="bool" Nullable="false" />
+          <Property Name="eletric_lock" Type="bool" Nullable="false" />
+          <Property Name="air_bag" Type="bool" Nullable="false" />
+          <Property Name="hydraulic_steering" Type="bool" Nullable="false" />
+          <Property Name="automatic" Type="bool" Nullable="false" />
+          <Property Name="abs" Type="bool" Nullable="false" />
+          <Property Name="passengers" Type="int" Nullable="false" />
+          <Property Name="trunk" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Fleets">
+          <Key>
+            <PropertyRef Name="id_fleet" />
+          </Key>
+          <Property Name="id_fleet" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="groupCar_id" Type="int" Nullable="false" />
+          <Property Name="feature_id" Type="int" Nullable="false" />
+          <Property Name="model_id" Type="int" Nullable="false" />
+          <Property Name="brand_id" Type="int" Nullable="false" />
+          <Property Name="image" Type="varchar" MaxLength="100" />
+          <Property Name="board" Type="varchar" MaxLength="8" Nullable="false" />
+          <Property Name="status" Type="bool" Nullable="false" />
+          <Property Name="year" Type="int" Nullable="false" />
+          <Property Name="daily" Type="decimal" Precision="6" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Fuels">
+          <Key>
+            <PropertyRef Name="id_fuel" />
+          </Key>
+          <Property Name="id_fuel" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GroupsCar">
+          <Key>
+            <PropertyRef Name="id_group" />
+          </Key>
+          <Property Name="id_group" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="description" Type="text" />
+        </EntityType>
+        <EntityType Name="Models">
+          <Key>
+            <PropertyRef Name="id_model" />
+          </Key>
+          <Property Name="id_model" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Rents">
+          <Key>
+            <PropertyRef Name="id_rent" />
+          </Key>
+          <Property Name="id_rent" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="client_id" Type="int" Nullable="false" />
+          <Property Name="fleet_id" Type="int" Nullable="false" />
+          <Property Name="place_of_withdrawal_id" Type="int" Nullable="false" />
+          <Property Name="date_of_withdrawal" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="return_date" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="amount" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="id_user" />
+          </Key>
+          <Property Name="id_user" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="80" Nullable="false" />
+          <Property Name="register" Type="uint" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="rentacarModelStoreContainer">
+          <EntitySet Name="Clients" EntityType="Self.Clients" Schema="rentacar" store:Type="Tables" />
+          <EntitySet Name="Features" EntityType="Self.Features" Schema="rentacar" store:Type="Tables" />
+          <EntitySet Name="Fleets" EntityType="Self.Fleets" Schema="rentacar" store:Type="Tables" />
+          <EntitySet Name="Fuels" EntityType="Self.Fuels" Schema="rentacar" store:Type="Tables" />
+          <EntitySet Name="GroupsCar" EntityType="Self.GroupsCar" Schema="rentacar" store:Type="Tables" />
+          <EntitySet Name="Models" EntityType="Self.Models" Schema="rentacar" store:Type="Tables" />
+          <EntitySet Name="Rents" EntityType="Self.Rents" Schema="rentacar" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="rentacar" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="rentacarModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Clients">
+          <Key>
+            <PropertyRef Name="id_client" />
+          </Key>
+          <Property Name="id_client" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+          <Property Name="cpf" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="sexo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="phone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="cnh" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="registroCnh" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="validadeCnh" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="categoriaCnh" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="ufCnh" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="rg" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="nascimento" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="logradouro" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+          <Property Name="cep" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="numero" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="complemento" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="bairro" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="cidade" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="estado" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Features">
+          <Key>
+            <PropertyRef Name="id_feature" />
+          </Key>
+          <Property Name="id_feature" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fuel_id" Type="Int32" Nullable="false" />
+          <Property Name="door" Type="Int32" Nullable="false" />
+          <Property Name="air_conditioning" Type="Boolean" Nullable="false" />
+          <Property Name="eletric_glass" Type="Boolean" Nullable="false" />
+          <Property Name="eletric_lock" Type="Boolean" Nullable="false" />
+          <Property Name="air_bag" Type="Boolean" Nullable="false" />
+          <Property Name="hydraulic_steering" Type="Boolean" Nullable="false" />
+          <Property Name="automatic" Type="Boolean" Nullable="false" />
+          <Property Name="abs" Type="Boolean" Nullable="false" />
+          <Property Name="passengers" Type="Int32" Nullable="false" />
+          <Property Name="trunk" Type="Single" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Fleets">
+          <Key>
+            <PropertyRef Name="id_fleet" />
+          </Key>
+          <Property Name="id_fleet" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="groupCar_id" Type="Int32" Nullable="false" />
+          <Property Name="feature_id" Type="Int32" Nullable="false" />
+          <Property Name="model_id" Type="Int32" Nullable="false" />
+          <Property Name="brand_id" Type="Int32" Nullable="false" />
+          <Property Name="image" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="board" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="status" Type="Boolean" Nullable="false" />
+          <Property Name="year" Type="Int32" Nullable="false" />
+          <Property Name="daily" Type="Decimal" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Fuels">
+          <Key>
+            <PropertyRef Name="id_fuel" />
+          </Key>
+          <Property Name="id_fuel" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GroupsCar">
+          <Key>
+            <PropertyRef Name="id_group" />
+          </Key>
+          <Property Name="id_group" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Models">
+          <Key>
+            <PropertyRef Name="id_model" />
+          </Key>
+          <Property Name="id_model" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Rents">
+          <Key>
+            <PropertyRef Name="id_rent" />
+          </Key>
+          <Property Name="id_rent" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="client_id" Type="Int32" Nullable="false" />
+          <Property Name="fleet_id" Type="Int32" Nullable="false" />
+          <Property Name="place_of_withdrawal_id" Type="Int32" Nullable="false" />
+          <Property Name="date_of_withdrawal" Type="DateTime" Nullable="false" />
+          <Property Name="return_date" Type="DateTime" Nullable="false" />
+          <Property Name="amount" Type="Decimal" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="id_user" />
+          </Key>
+          <Property Name="id_user" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="register" Type="Int64" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="rentacarEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Clients" EntityType="Self.Clients" />
+          <EntitySet Name="Features" EntityType="Self.Features" />
+          <EntitySet Name="Fleets" EntityType="Self.Fleets" />
+          <EntitySet Name="Fuels" EntityType="Self.Fuels" />
+          <EntitySet Name="GroupsCar" EntityType="Self.GroupsCar" />
+          <EntitySet Name="Models" EntityType="Self.Models" />
+          <EntitySet Name="Rents" EntityType="Self.Rents" />
+          <EntitySet Name="Users" EntityType="Self.Users" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="rentacarModelStoreContainer" CdmEntityContainer="rentacarEntities">
+          <EntitySetMapping Name="Clients">
+            <EntityTypeMapping TypeName="rentacarModel.Clients">
+              <MappingFragment StoreEntitySet="Clients">
+                <ScalarProperty Name="id_client" ColumnName="id_client" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="cpf" ColumnName="cpf" />
+                <ScalarProperty Name="sexo" ColumnName="sexo" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="cnh" ColumnName="cnh" />
+                <ScalarProperty Name="registroCnh" ColumnName="registroCnh" />
+                <ScalarProperty Name="validadeCnh" ColumnName="validadeCnh" />
+                <ScalarProperty Name="categoriaCnh" ColumnName="categoriaCnh" />
+                <ScalarProperty Name="ufCnh" ColumnName="ufCnh" />
+                <ScalarProperty Name="rg" ColumnName="rg" />
+                <ScalarProperty Name="nascimento" ColumnName="nascimento" />
+                <ScalarProperty Name="logradouro" ColumnName="logradouro" />
+                <ScalarProperty Name="cep" ColumnName="cep" />
+                <ScalarProperty Name="numero" ColumnName="numero" />
+                <ScalarProperty Name="complemento" ColumnName="complemento" />
+                <ScalarProperty Name="bairro" ColumnName="bairro" />
+                <ScalarProperty Name="cidade" ColumnName="cidade" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Features">
+            <EntityTypeMapping TypeName="rentacarModel.Features">
+              <MappingFragment StoreEntitySet="Features">
+                <ScalarProperty Name="id_feature" ColumnName="id_feature" />
+                <ScalarProperty Name="fuel_id" ColumnName="fuel_id" />
+                <ScalarProperty Name="door" ColumnName="door" />
+                <ScalarProperty Name="air_conditioning" ColumnName="air_conditioning" />
+                <ScalarProperty Name="eletric_glass" ColumnName="eletric_glass" />
+                <ScalarProperty Name="eletric_lock" ColumnName="eletric_lock" />
+                <ScalarProperty Name="air_bag" ColumnName="air_bag" />
+                <ScalarProperty Name="hydraulic_steering" ColumnName="hydraulic_steering" />
+                <ScalarProperty Name="automatic" ColumnName="automatic" />
+                <ScalarProperty Name="abs" ColumnName="abs" />
+                <ScalarProperty Name="passengers" ColumnName="passengers" />
+                <ScalarProperty Name="trunk" ColumnName="trunk" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Fleets">
+            <EntityTypeMapping TypeName="rentacarModel.Fleets">
+              <MappingFragment StoreEntitySet="Fleets">
+                <ScalarProperty Name="id_fleet" ColumnName="id_fleet" />
+                <ScalarProperty Name="groupCar_id" ColumnName="groupCar_id" />
+                <ScalarProperty Name="feature_id" ColumnName="feature_id" />
+                <ScalarProperty Name="model_id" ColumnName="model_id" />
+                <ScalarProperty Name="brand_id" ColumnName="brand_id" />
+                <ScalarProperty Name="image" ColumnName="image" />
+                <ScalarProperty Name="board" ColumnName="board" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="year" ColumnName="year" />
+                <ScalarProperty Name="daily" ColumnName="daily" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Fuels">
+            <EntityTypeMapping TypeName="rentacarModel.Fuels">
+              <MappingFragment StoreEntitySet="Fuels">
+                <ScalarProperty Name="id_fuel" ColumnName="id_fuel" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GroupsCar">
+            <EntityTypeMapping TypeName="rentacarModel.GroupsCar">
+              <MappingFragment StoreEntitySet="GroupsCar">
+                <ScalarProperty Name="id_group" ColumnName="id_group" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="description" ColumnName="description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Models">
+            <EntityTypeMapping TypeName="rentacarModel.Models">
+              <MappingFragment StoreEntitySet="Models">
+                <ScalarProperty Name="id_model" ColumnName="id_model" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rents">
+            <EntityTypeMapping TypeName="rentacarModel.Rents">
+              <MappingFragment StoreEntitySet="Rents">
+                <ScalarProperty Name="id_rent" ColumnName="id_rent" />
+                <ScalarProperty Name="client_id" ColumnName="client_id" />
+                <ScalarProperty Name="fleet_id" ColumnName="fleet_id" />
+                <ScalarProperty Name="place_of_withdrawal_id" ColumnName="place_of_withdrawal_id" />
+                <ScalarProperty Name="date_of_withdrawal" ColumnName="date_of_withdrawal" />
+                <ScalarProperty Name="return_date" ColumnName="return_date" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="rentacarModel.Users">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="id_user" ColumnName="id_user" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="register" ColumnName="register" />
+                <ScalarProperty Name="password" ColumnName="password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
